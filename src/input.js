@@ -1,0 +1,35 @@
+import Paddle from "./paddle";
+
+export default class InputHandler {
+  constructor(paddle, game) {
+    document.addEventListener("keydown", (event) => {
+      switch (event.keyCode) {
+        case 37:
+          paddle.moveLeft();
+          break;
+        case 39:
+          paddle.moveRight();
+          break;
+        case 27: //esc key
+          game.togglePause();
+          break;
+        case 32: //spacebar
+          game.start();
+          break;
+        case 82:
+          game.restart();
+          break;
+      }
+    });
+    document.addEventListener("keyup", (event) => {
+      switch (event.keyCode) {
+        case 37:
+          if (paddle.speed < 0) paddle.stop();
+          break;
+        case 39:
+          if (paddle.speed > 0) paddle.stop();
+          break;
+      }
+    });
+  }
+}
